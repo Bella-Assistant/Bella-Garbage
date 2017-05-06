@@ -26,15 +26,21 @@
 <body>
     <div id="map"></div>
     <script>
-        function initMap() {
+        var directionsService, directionsDisplay;
 
+        function initMap() {
+            var directionsService = new google.maps.DirectionsService;
+            var directionsDisplay = new google.maps.DirectionsRenderer;
             var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 3,
+                zoom: 7,
                 center: {
-                    lat: -28.024,
-                    lng: 140.887
-                }
+                    lat: 12.9586584,
+                    lng: 77.5684325
+                },
+                mapTypeId: 'terrain'
             });
+
+
 
             // Create an array of alphabetical characters used to label the markers.
             var labels = 'SABCDEF';
@@ -54,7 +60,45 @@
             var markerCluster = new MarkerClusterer(map, markers, {
                 imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
             });
+            directionsDisplay.setMap(map);
+            console.log(locations);
+            var start, end;
+
+            function caller() {
+                var waypoints = [{
+                        location: new google.maps.LatLng(13.0301762, 77.5730547),
+                        stopover: false
+                    },
+                    {
+                        location: new google.maps.LatLng(13.0090519, 77.567745),
+                        stopover: false
+                    },
+                    {
+                        location: new google.maps.LatLng(12.9803999, 77.5363397),
+                        stopover: false
+                    }
+                ];
+                calculateAndDisplayRoute(directionsService, directionsDisplay, waypoints);
+            };
+            caller();
+
+            function calculateAndDisplayRoute(directionsService, directionsDisplay, way) {
+                directionsService.route({
+                    origin: locations[0],
+                    destination: locations[5],
+                    waypoints: way,
+                    travelMode: 'DRIVING'
+                }, function(response, status) {
+                    console.log(response + status);
+                    if (status === 'OK') {
+                        directionsDisplay.setDirections(response);
+                    } else {
+                        window.alert('Directions request failed due to ' + status);
+                    }
+                });
+            }
         }
+
         var locations = [{
                 lat: 12.9586584,
                 lng: 77.5684325
@@ -83,7 +127,7 @@
                 lat: 12.944779,
                 lng: 77.5933347
             }
-        ]
+        ];
     </script>
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
     </script>
