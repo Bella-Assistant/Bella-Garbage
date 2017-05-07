@@ -67,9 +67,34 @@
             console.log(locations);
             var start, end;
             $.getJSON("http://api.thingspeak.com/channels/265517/feed/last.json", function(data) {
-
+                var points = data['field8'];
+                console.log(points);
             });
-
+            var tour = [{
+                    location: new google.maps.LatLng(13.0297295, 77.6130547),
+                    stopover: false
+                },
+                {
+                    location: new google.maps.LatLng(13.0301762, 77.5730547),
+                    stopover: false
+                },
+                {
+                    location: new google.maps.LatLng(13.0090519, 77.567745),
+                    stopover: false
+                },
+                {
+                    location: new google.maps.LatLng(12.9800425, 77.6136859),
+                    stopover: false
+                },
+                {
+                    location: new google.maps.LatLng(12.9803999, 77.5363397),
+                    stopover: false
+                },
+                {
+                    location: new google.maps.LatLng(12.944779, 77.5933347),
+                    stopover: false
+                },
+            ];
 
             function caller() {
                 var waypoints = [{
