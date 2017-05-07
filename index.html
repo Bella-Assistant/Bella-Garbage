@@ -25,6 +25,9 @@
 
 <body>
     <div id="map"></div>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+
     <script>
         var directionsService, directionsDisplay;
 
@@ -43,7 +46,7 @@
 
 
             // Create an array of alphabetical characters used to label the markers.
-            var labels = 'SABCDEF';
+            var labels = 'S123456';
 
             // Add some markers to the map.
             // Note: The code uses the JavaScript Array.prototype.map() method to
@@ -63,6 +66,10 @@
             directionsDisplay.setMap(map);
             console.log(locations);
             var start, end;
+            $.getJSON("http://api.thingspeak.com/channels/265517/feed/last.json", function(data) {
+
+            });
+
 
             function caller() {
                 var waypoints = [{
@@ -79,7 +86,7 @@
                     }
                 ];
                 calculateAndDisplayRoute(directionsService, directionsDisplay, waypoints);
-            };
+            }
             caller();
 
             function calculateAndDisplayRoute(directionsService, directionsDisplay, way) {
@@ -99,31 +106,31 @@
             }
         }
 
-        var locations = [{
+        var locations = [{ //Source
                 lat: 12.9586584,
                 lng: 77.5684325
             },
-            {
+            { // 1
                 lat: 13.0297295,
                 lng: 77.6130547
             },
-            {
+            { // 2
                 lat: 13.0301762,
                 lng: 77.5730547
             },
-            {
+            { // 3
                 lat: 13.0090519,
                 lng: 77.567745
             },
-            {
+            { // 4
                 lat: 12.9800425,
                 lng: 77.6136859
             },
-            {
+            { // 5
                 lat: 12.9803999,
                 lng: 77.5363397
             },
-            {
+            { // 6
                 lat: 12.944779,
                 lng: 77.5933347
             }
